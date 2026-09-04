@@ -6,10 +6,10 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Layout('layouts.app')]
+#[Title('Counter')]
 class Counter extends Component
 {
-    #[Layout('layouts.app')]
-    #[Title('Counter')]
     public int $counter = 0;
 
     public function increment() : void
