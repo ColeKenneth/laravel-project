@@ -7,6 +7,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/employee', Employee::class)->name('employee');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
