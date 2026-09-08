@@ -25,23 +25,6 @@
             </div>
 
             <div>
-                <label for="position" class="block text-sm font-medium text-gray-700">
-                    Position
-                </label>
-
-                <input
-                    id="position"
-                    type="text"
-                    wire:model.live="position"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                >
-
-                @error('position')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div>
                 <label for="firstName" class="block text-sm font-medium text-gray-700">
                     First Name
                 </label>
@@ -110,6 +93,23 @@
             </div>
 
             <div>
+                <label for="position" class="block text-sm font-medium text-gray-700">
+                    Position
+                </label>
+
+                <input
+                    id="position"
+                    type="text"
+                    wire:model.live="position"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                >
+
+                @error('position')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
                 <label for="hiredAt" class="block text-sm font-medium text-gray-700">
                     Hire Date
                 </label>
@@ -144,4 +144,85 @@
             </button>
         </div>
     </form>
+
+    <div class="mt-10 overflow-hidden rounded-lg bg-white shadow-xl ring-1 ring-gray-200">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                        Employee Number
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                        Name
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                        Email
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                        Phone Number
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                        Position
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                        Hire Date
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200 bg-white">
+                @forelse ($employees as $employee)
+                <tr>
+                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
+                        {{ $employee->employee_number }}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
+                        {{ $employee->first_name }} {{ $employee->last_name }}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
+                        {{ $employee->email }}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
+                        {{ $employee->phone_number }}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
+                        {{ $employee->position }}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
+                        {{ $employee->hired_at->format('Y-m-d') }}
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">
+                        No employees yet.
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    @if ($showSuccessModal)
+    <div class="fixed inset-0 z-50 flex items-center justify-center px-4 py-6">
+        <div class="absolute inset-0 bg-gray-900/50"></div>
+
+        <div class="relative w-full max-w-md overflow-hidden rounded-lg bg-white shadow-2xl">
+            <div class="px-8 py-7 text-center">
+                <h2 class="text-xl font-semibold text-gray-900">
+                    Employee Saved
+                </h2>
+
+                <p class="mt-2 text-base text-gray-600">
+                    The employee record was successfully saved.
+                </p>
+            </div>
+
+            <div class="border-t border-gray-100 bg-gray-50 px-8 py-5">
+                <button type="button" wire:click="closeSuccessModal"
+                class="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500">OK</button>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>

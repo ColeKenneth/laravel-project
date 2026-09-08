@@ -43,11 +43,20 @@ class Employee extends Component
             'hired_at' => $this->hiredAt
         ]);
 
+        $this->reset();
+
         $this->showSuccessModal = true;
+    }
+
+    public function closeSuccessModal() : void
+    {
+        $this->showSuccessModal = false;
     }
 
     public function render() : View
     {
-        return view('livewire.employee');
+        return view('livewire.employee', [
+            'employees' => EmployeeModel::all(),
+        ]);
     }
 }
