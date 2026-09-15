@@ -218,6 +218,8 @@
                 @endforelse
             </tbody>
         </table>
+
+        {{ $employees->links() }}
     </div>
 
     @if ($showSuccessModal)

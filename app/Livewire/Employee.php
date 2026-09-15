@@ -7,11 +7,14 @@ use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
 #[Title('Employee')]
 class Employee extends Component
 {
+    use WithPagination;
+
     public string $employeeNumber = '';
     public string $firstName = '';
     public string $lastName = '';
@@ -136,7 +139,7 @@ class Employee extends Component
     public function render() : View
     {
         return view('livewire.employee', [
-            'employees' => EmployeeModel::all(),
+            'employees' => EmployeeModel::latest()->paginate(5),
         ]);
     }
 }
