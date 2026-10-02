@@ -229,11 +229,11 @@
         <div class="relative w-full max-w-md overflow-hidden rounded-lg bg-white shadow-2xl">
             <div class="px-8 py-7 text-center">
                 <h2 class="text-xl font-semibold text-gray-900">
-                    Employee Saved
+                    {{ $successMessage === 'Employee record was successfully updated.' ? 'Employee Updated' : 'Employee Saved'}}
                 </h2>
 
                 <p class="mt-2 text-base text-gray-600">
-                    The employee record was successfully saved.
+                    {{ $successMessage }}
                 </p>
             </div>
 

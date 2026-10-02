@@ -22,6 +22,7 @@ class Employee extends Component
     public string $phoneNumber = '';
     public string $position = '';
     public string $hiredAt = '';
+    public string $successMessage = '';
     public bool $showSuccessModal = false;
     public ?int $editingEmployeeId = null;
     public ?int $deletingEmployeeId = null;
@@ -50,7 +51,7 @@ class Employee extends Component
         ]);
 
         $this->reset();
-
+        $this->successMessage = "Employee record was successfully saved.";
         $this->showSuccessModal = true;
     }
 
@@ -66,6 +67,8 @@ class Employee extends Component
         $this->phoneNumber = $employee->phone_number;
         $this->position = $employee->position;
         $this->hiredAt = $employee->hired_at->format('Y-m-d');
+
+        $this->resetValidation();
     }
 
     public function update() : void
@@ -93,7 +96,7 @@ class Employee extends Component
         ]);
 
         $this->reset();
-
+        $this->successMessage = "Employee record was successfully updated.";
         $this->showSuccessModal = true;
     }
 
